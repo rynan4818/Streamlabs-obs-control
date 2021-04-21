@@ -3,6 +3,8 @@
 
 [サンプル動画](https://twitter.com/rynan4818/status/1384822435434831874)
 
+※[OBS Studio版はこちら](https://github.com/rynan4818/obs-control)
+
 ## 使用方法
 
  1. Beat Saber Overlay 改良版をインストールして使えるようにします
