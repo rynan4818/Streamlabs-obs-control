@@ -5,6 +5,8 @@
 
 ※[OBS Studio版はこちら](https://github.com/rynan4818/obs-control)
 
+※[XSplit Broadcaster用の同様ツールはこちら](https://github.com/rynan4818/BS-AutoSceneChanger)
+
 ## 使用方法
 
  1. Beat Saber Overlay 改良版をインストールして使えるようにします
@@ -58,6 +60,23 @@
     デフォルト設定のまま使う場合は、メニューシーンのStreamlabs OBSのシーン名を `BS-Game` ゲームシーンのシーン名を `BS-Menu` とします。
 
     ![preview](https://rynan4818.github.io/streamlabs-obs-control2.png)
+
+         const obs_token = '';  //StreamlabsOBSの設定の「リモートコントロール」の「詳細を表示」から「APIトークン」をコピーして''内に貼り付ける
+         const obs_uri   = 'localhost';                 //基本的に変更不要
+         const obs_port  = '59650';                     //基本的に変更不要
+         const obs_game_scene_name  = 'BS-Game';        //ゲームシーン名
+         const obs_menu_scene_name  = 'BS-Menu';        //メニューシーン名
+         const obs_game_event_delay = 0;                //ゲームシーン開始タイミングを遅らせる場合に遅らせるミリ秒を設定して下さい。タイミングを早めること（マイナス値）はできません。[0の場合は無効]
+         const obs_menu_event_delay = 0;                //ゲームシーン終了(メニューに戻る)タイミングを遅らせる場合に遅らせるミリ秒を設定して下さい。タイミングを早めること（マイナス値）はできません。[0の場合は無効]
+         const obs_menu_event_switch = false;           //[true/false]ゲームシーン終了タイミングをfinish/failした瞬間に変更する場合は true にします。約1秒程度早まりますのでobs_menu_event_delayと合わせて終了タイミングの微調整に使えます。
+         const obs_start_scene_duration  = 0;           //ゲームシーンに切り替える前に開始シーンを表示する時間(秒単位) [0の場合は無効]
+         const obs_start_scene_name      = 'BS-Start';  //開始シーン名  ※使用時はobs_start_scene_durationの設定要
+         const obs_finish_scene_duration = 0;           //Finish(クリア)時にメニューシーンに切替わる前に終了シーンを表示する時間(秒単位) [0の場合は無効]
+         const obs_finish_scene_name     = 'BS-Finish'; //Finish(クリア)用終了シーン名  ※使用時はobs_finish_scene_durationの設定要
+         const obs_fail_scene_duration   = 0;           //Fail(フェイル)時にメニューシーンに切替わる前に終了シーンを表示する時間(秒単位) [0の場合は無効]
+         const obs_fail_scene_name       = 'BS-Fail';   //Fail(フェイル)用終了シーン名  ※使用時はobs_fail_scene_durationの設定要
+         const obs_pause_scene_duration  = 0;           //Pause(ポーズ)してメニューに戻る場合にメニューシーンに切替わる前に終了シーンを表示する時間(秒単位) [0の場合は無効]
+         const obs_pause_scene_name      = 'BS-Pause';  //Pause(ポーズ)用終了シーン名  ※使用時はobs_pause_scene_durationの設定
 
  6. あとは通常通りStreamlabs OBSで記録・配信すればＯＫです。
 
