@@ -2,7 +2,8 @@
 const ConnectEvent = 1,
 	StreamingStatusEvent = 2,
 	StreamingStatusChangedEvent = 3,
-	ScenesEvent = 4;
+	ScenesEvent = 4,
+	RecordingCheckEvent = 5;
 
 class StreamlabsOBSClient {
 
@@ -39,6 +40,12 @@ class StreamlabsOBSClient {
 			const data = JSON.parse(message.data);
 
 			switch (data.id) {
+				case RecordingCheckEvent:
+					this.recordStatus = data.result.recordingStatus;
+					if (this.recordStatus !== 'recording') {
+						not_rec_audio.play();
+					}
+					break;
 				case ConnectEvent:
 					if (data.error !== undefined) {
 						this.handleError(data.error.message)
@@ -90,6 +97,14 @@ class StreamlabsOBSClient {
 	subscribe(event) {
 		let message;
 		switch (event) {
+			case "recording_check":
+				message = {
+					id: RecordingCheckEvent,
+					jsonrpc: '2.0',
+					method: 'getModel',
+					params: { resource: 'StreamingService' },
+				}
+				break
 			case "streaming":
 				message = {
 					id: StreamingStatusChangedEvent,
@@ -182,6 +197,10 @@ class StreamlabsOBSClient {
 
 	getScenes() {
 		return this.scenes;
+	}
+	
+	recording_check() {
+		this.subscribe("recording_check");
 	}
 
 }
