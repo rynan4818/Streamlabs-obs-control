@@ -72,7 +72,7 @@
     ![preview](https://rynan4818.github.io/streamlabs-obs-control2.png)
 
          const obs_token = '';  //StreamlabsOBSの設定の「リモートコントロール」の「詳細を表示」から「APIトークン」をコピーして''内に貼り付ける
-         const obs_uri   = 'localhost';                 //基本的に変更不要
+         const obs_uri   = '127.0.0.1';                 //基本的に変更不要
          const obs_port  = '59650';                     //基本的に変更不要
          const obs_game_scene_name  = 'BS-Game';        //ゲームシーン名
          const obs_menu_scene_name  = 'BS-Menu';        //メニューシーン名
