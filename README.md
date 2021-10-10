@@ -38,7 +38,7 @@
     - `js` フォルダに、`obs-control.js` と `index.js` と `sockjs.min.js` と `sockjs.min.js.map` の４つ
     - インストールフォルダの `index.html` を本ツールの物に差し替え(上書き)
 
-    本ツールは、Beat Saber Overlay 改良版の[Release v2021/05/09](https://github.com/rynan4818/beat-saber-overlay/releases/tag/v2021%2F05%2F09)～[Release v2021/08/09](https://github.com/rynan4818/beat-saber-overlay/releases/tag/v2021%2F08%2F09)を元にしています。
+    本ツールは、Beat Saber Overlay 改良版の[Release v2021/05/09](https://github.com/rynan4818/beat-saber-overlay/releases/tag/v2021%2F05%2F09)～[Release v2021/10/10](https://github.com/rynan4818/beat-saber-overlay/releases/tag/v2021%2F10%2F10)を元にしています。
 
     オーバーレイがそれ以外のバージョンになっている場合、`index.html` を上書きするとおかしくなる場合があります。
     
