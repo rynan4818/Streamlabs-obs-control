@@ -62,6 +62,7 @@ function obs_start_scene_change() {
 
 ex_songStart.push((data) => {
   obs_end_event = '';
+  obs_full_combo = true;
   if (obs_bs_menu_flag) {
     clearTimeout(obs_timeout_id);
     obs_bs_menu_flag = false;
@@ -117,7 +118,7 @@ ex_menu.push((data) => {
 });
 
 ex_finished.push((data) => {
-  if (data.status.performance.passedNotes === data.status.performance.combo) {
+  if (obs_full_combo && data.status.performance.passedNotes === data.status.performance.combo) {
     obs_end_event = 'fullcombo';
   } else {
     obs_end_event = 'finish';
@@ -145,4 +146,12 @@ ex_hello.push((data) => {
   } else {
     obs_timeout_id = setTimeout(obs_menu_scene_change, 3000);
   }
+});
+
+ex_bombCut.push((data) => {
+  obs_full_combo = false;
+});
+
+ex_obstacleEnter.push((data) => {
+  obs_full_combo = false;
 });
