@@ -1,9 +1,12 @@
 # Streamlabs-obs-control
-[Beat Saber Overlay 改良版](https://github.com/rynan4818/beat-saber-overlay)でStreamlabs OBSのシーンコントロールをする追加スクリプトです。
+[Beat Saber Overlay 改良版](https://github.com/rynan4818/beat-saber-overlay)でStreamlabs Desktopのシーンコントロールをする追加スクリプトです。
 
 メニュー画面とゲームプレイ画面の枠（カメラ枠とか)を変更したり、画面切替時にトランジションを入れたり、開始や終了時などイベント毎に中間のシーンで違った動画を再生したりできます。
 
-シーン切替を使用しない場合も、BeatSaberプレイ時のOBSのシーンをゲームシーン名、メニューシーン名に設定しておくことでシーン切替忘れ防止になります。
+### シーン切り替えサンプル
+![picture_pc_aee6153c9905450e394c81fd0bec7df4](https://user-images.githubusercontent.com/14249877/169730665-ae46b4ac-0d08-4a02-9f20-4bb397e11bbf.gif)
+
+シーン切替を使用しない場合も、BeatSaberプレイ時のStreamlabs Desktopのシーンをゲームシーン名、メニューシーン名に設定しておくことでシーン切替忘れ防止になります。
 
 また、録画忘れ防止機能として、録画ボタンを押さないで譜面のプレイ開始をすると警告音が鳴る機能もあります。
 
@@ -21,11 +24,11 @@
 
     インストールと設定方法は上記サイトに詳細があります。
 
-    オーバーレイ機能を使用しない場合は、Streamlabs OBS上でオーバーレイを非表示にしてください
+    オーバーレイ機能を使用しない場合は、Streamlabs Desktop上でオーバーレイを非表示にしてください
 
     (例えば、他のDataPullerとかのオーバーレイを使用している場合など)
 
-    非表示にしても、裏でOBSコントロール機能は動くのでStreamlabs OBSのどこかのシーンのソースにオーバーレイを設定する必要があります
+    非表示にしても、裏でシーンコントロール機能は動くのでStreamlabs Desktopのどこかのシーンのソースにオーバーレイを設定する必要があります
 
     **注意点として、オーバーレイの設定で`表示されていないときにソースをシャットダウン`のチェックを外して下さい。また、`シーンがアクティブになったときにブラウザの表示を更新`もチェックしないで下さい。**
 
@@ -57,7 +60,7 @@
 
       の３行を追加してください。
 
- 4. Streamlabs OBSを起動して、`設定`の`リモートコントロール`から`詳細を表示`をクリックして`APIトークン`の文字列をコピーします。
+ 4. Streamlabs Desktopを起動して、`設定`の`リモートコントロール`から`詳細を表示`をクリックして`APIトークン`の文字列をコピーします。
      また、ポート番号が`59650`になっているか確認します。（59650と違う場合は、59650に修正するか後述する本ツールの設定でポート番号を指定します。)
 
     ![preview](https://rynan4818.github.io/streamlabs-obs-control1.png)
@@ -68,7 +71,7 @@
 
     他の行頭が`const obs_`で始まる内容は必要に応じて変更します。
 
-    デフォルト設定のまま使う場合は、メニューシーンのStreamlabs OBSのシーン名を `BS-Game` ゲームシーンのシーン名を `BS-Menu` とします。
+    デフォルト設定のまま使う場合は、メニューシーンのStreamlabs Desktopのシーン名を `BS-Game` ゲームシーンのシーン名を `BS-Menu` とします。
 
     シーン切り替え機能を使用せず、録画状態チェックのみ使用する場合は `obs_game_scene_name` と `obs_menu_scene_name` を普段BeatSaberで使用するシーン名にして、`obs_recording_check`を`true`にしてください。シーン切り替え忘れ防止、録画忘れ防止になります。
 
@@ -98,7 +101,7 @@
          const obs_option2_scene_name = 'BS-Option2';   //HttpPlayButtonStatus の "Option Scene 2"ボタンシーン名
          const obs_option3_scene_name = 'BS-Option3';   //HttpPlayButtonStatus の "Option Scene 3"ボタンシーン名
 
- 6. あとは通常通りStreamlabs OBSで記録・配信すればＯＫです。
+ 6. あとは通常通りStreamlabs Desktopで記録・配信すればＯＫです。
 ## 曲専用シーン切り替えについて
 曲専用にゲームスタート・エンド及びプレイ中の曲時間に合わせてシーン切り替えが可能です。
 
