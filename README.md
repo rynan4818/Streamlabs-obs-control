@@ -35,24 +35,27 @@
 
  3. 1.でインストールしたオーバーレイのフォルダに、本ツールのファイルをコピーしてください。
 
-    - `js` フォルダに、`obs-control.js` と `index.js` と `sockjs.min.js` と `sockjs.min.js.map` の４つ
+    - `js` フォルダに、`obs-control.js` と `index.js` と `sockjs.min.js` と `sockjs.min.js.map` の４つを追加
+    
+      本ツールの`js`フォルダのファイルは、Beat Saber Overlay 改良版のRelease v2022/04/25以降の`js`フォルダのファイルを対象にしています。それ以前の場合は最新版の`js`フォルダのファイルに差し替えて下さい。
+    
     - インストールフォルダの `index.html` を本ツールの物に差し替え(上書き)
 
-    本ツールは、Beat Saber Overlay 改良版の[Release v2021/05/09](https://github.com/rynan4818/beat-saber-overlay/releases/tag/v2021%2F05%2F09)～[Release v2021/10/10](https://github.com/rynan4818/beat-saber-overlay/releases/tag/v2021%2F10%2F10)を元にしています。
+      本ツールの`index.html`は、Beat Saber Overlay 改良版の[Release v2021/05/09](https://github.com/rynan4818/beat-saber-overlay/releases/tag/v2021%2F05%2F09)～[Release v2022/04/25](https://github.com/rynan4818/beat-saber-overlay/releases/tag/v2022%2F04%2F25)を元にしています。
 
-    オーバーレイがそれ以外のバージョンになっている場合、`index.html` を上書きするとおかしくなる場合があります。
+      オーバーレイがそれ以外のバージョンになっている場合や改造されている場合、他の表示スキンに変更している場合などは`index.html` を上書きすると表示内容が変わってしまいます。
     
-    その場合は、インストールしたオーバーレイの `index.html` をメモ帳で開いて、最後の方の
+      その場合は、インストールしたオーバーレイの `index.html` をメモ帳で開いて、最後の方の
 
-        <script src="./js/options.js"></script>
+          <script src="./js/options.js"></script>
 
-    の上の行に
+      の上の行に
 
-        <script src="./js/sockjs.min.js"></script>
-        <script src="./js/index.js"></script>
-        <script src='./js/obs-control.js'></script>
+          <script src="./js/sockjs.min.js"></script>
+          <script src="./js/index.js"></script>
+          <script src='./js/obs-control.js'></script>
 
-    の３つを追加してください。
+      の３行を追加してください。
 
  4. Streamlabs OBSを起動して、`設定`の`リモートコントロール`から`詳細を表示`をクリックして`APIトークン`の文字列をコピーします。
      また、ポート番号が`59650`になっているか確認します。（59650と違う場合は、59650に修正するか後述する本ツールの設定でポート番号を指定します。)
@@ -78,7 +81,7 @@
          const obs_menu_scene_name  = 'BS-Menu';        //メニューシーン名
          const obs_game_event_delay = 0;                //ゲームシーン開始タイミングを遅らせる場合に遅らせるミリ秒を設定して下さい。タイミングを早めること（マイナス値）はできません。[0の場合は無効]
          const obs_menu_event_delay = 0;                //ゲームシーン終了(メニューに戻る)タイミングを遅らせる場合に遅らせるミリ秒を設定して下さい。タイミングを早めること（マイナス値）はできません。[0の場合は無効]
-         const obs_menu_event_switch = false;           //[true/false]ゲームシーン終了タイミングをfinish/failした瞬間に変更する場合は true にします。約1秒程度早まりますのでobs_menu_event_delayと合わせて終了タイミングの微調整に使えます。
+         const obs_menu_event_switch = false;           //[true/false]ゲームシーン終了タイミングをfinish/failした瞬間に変更する場合は true にします。約3~4秒程度早まりますのでobs_menu_event_delayと合わせて終了タイミングの微調整に使えます。
          const obs_start_scene_duration     = 0;              //ゲームシーンに切り替える前に開始シーンを表示する時間(秒単位[小数3位までOK]) [0の場合は無効]
          const obs_start_scene_name         = 'BS-Start';     //開始シーン名  ※使用時はobs_start_scene_durationの設定要
          const obs_finish_scene_duration    = 0;              //Finish(クリア)時にメニューシーンに切替わる前に終了シーンを表示する時間(秒単位[小数3位までOK]) [0の場合は無効]
@@ -88,22 +91,25 @@
          const obs_fail_scene_duration      = 0;              //Fail(フェイル)時にメニューシーンに切替わる前に終了シーンを表示する時間(秒単位[小数3位までOK]) [0の場合は無効]
          const obs_fail_scene_name          = 'BS-Fail';      //Fail(フェイル)用終了シーン名  ※使用時はobs_fail_scene_durationの設定要
          const obs_pause_scene_duration     = 0;              //Pause(ポーズ)してメニューに戻る場合にメニューシーンに切替わる前に終了シーンを表示する時間(秒単位[小数3位までOK]) [0の場合は無効]
-         const obs_pause_scene_name         = 'BS-Pause';     //Pause(ポーズ)用終了シーン名  ※使用時はobs_pause_scene_durationの設定
+         const obs_pause_scene_name         = 'BS-Pause';     //Pause(ポーズ)用終了シーン名  ※使用時はobs_pause_scene_durationの設定要
          const obs_recording_check          = false;          //[true/false]trueにするとゲームシーン開始時に録画状態をチェックする。
          const obs_not_rec_sound            = 'file:///C://Windows//Media//Windows%20Notify%20Calendar.wav' //ゲームシーン開始時に録画されていない場合に鳴らす音(適当な音声ファイルをブラウザに貼り付けて、アドレス欄のURLをコピーする)
-
+         const obs_option1_scene_name = 'BS-Option1';   //HttpPlayButtonStatus の "Option Scene 1"ボタンシーン名
+         const obs_option2_scene_name = 'BS-Option2';   //HttpPlayButtonStatus の "Option Scene 2"ボタンシーン名
+         const obs_option3_scene_name = 'BS-Option3';   //HttpPlayButtonStatus の "Option Scene 3"ボタンシーン名
 
  6. あとは通常通りStreamlabs OBSで記録・配信すればＯＫです。
 ## 曲専用シーン切り替えについて
 曲専用にゲームスタート・エンド及びプレイ中の曲時間に合わせてシーン切り替えが可能です。
 
-**本家のBeat Saber HTTP Statusは、曲時間が同期しないのでズレる可能性が高いです。HttpSiraStatusは毎秒同期するため基本的にズレません。HttpSiraStatusの使用をオススメします**
+**本家のBeat Saber HTTP Statusは、曲時間が同期しないのでズレる可能性が高いです。HttpSiraStatusは毎秒同期するため基本的にズレません。HttpSiraStatusの使用をオススメします。**
+曲時間の同期はBeat Saber Overlay 改良版のRelease v2021/10/10以降で有効です。
 
 通常は曲専用シーン切り替えは無効になっています。有効にするには、`index.html` をメモ帳（エディタ）で開いて
 
     <script src='./js/obs-control.js'></script>
 
-[の行の**上に**](https://github.com/rynan4818/Streamlabs-obs-control/blob/main/index.html#L115)
+[の行の**上に**](https://github.com/rynan4818/Streamlabs-obs-control/blob/main/index.html#L115) ※`obs-control.js`より下だと動作しません。
 
     <script src='./js/song-scene.js'></script>
 
@@ -112,14 +118,14 @@
 次に`js`フォルダの`song-scene.js` ファイルに曲ごとのシーン切り替え情報を設定します。
 
     const song_scene_json = `                                 //バックスラッシュからJSONデータ開始
-    [
+    [                                                         //設定したい譜面の数だけ並べる
       {                                                       //１譜面目の情報
         "hash": "06121351C6BC732112B20D2C524FB84C036DDF5E",   //譜面のハッシュ値
         "startchange": true,                                  //開始時にデフォルトのゲーム中用シーンに true:切り替える false:切り替えない
         "endchange": true,                                    //終了時にデフォルトのメニュー用シーンに true:切り替える false:切り替えない
         "timelist": [                                         //曲時間で切り替えるシーンを必要な数並べる
           {
-             "time": "0:10.500",                              //譜面の曲時間0分10.5秒でTEST3シーン切り替え
+             "time": "0:10.500",                              //譜面の曲時間0分10.5秒でTEST3シーン切り替え(10.5秒は10.500として下さい。10.5だと10.005秒になります)
              "scene": "TEST3"
           },
           {
@@ -129,7 +135,7 @@
         ]
       },
       {                                                       //２譜面目の情報
-        "hash": "02D18079CE5C7D0179DADD9D77A3D8C729D8C1D8",
+        "songname": "Mainichi Kashimashi Pharmacy",           //譜面の曲名
         "startchange": true,
         "gamescene": "GAME",                                  //開始時に曲専用のGAMEシーンに切り替える
         "endchange": true,
@@ -167,23 +173,24 @@
         ]
       }   //最後は,不要
     ]
-    `;                                                        //バックスラッシュまででがJSONデータ終了
+    `;                                                        //バックスラッシュまででJSONデータ終了
 
 1. `song-scene.js`の中身の``(バッククオート)内をJSONデータで作成します。
 2. 1曲ごとに、[オブジェクト](https://github.com/rynan4818/Streamlabs-obs-control/blob/main/js/song-scene.js#L3-L17)の配列にして下さい。
 3. `hash`は譜面のハッシュ値です。ScoreSaberの譜面ページなどで確認するのが簡単です。
 ![image](https://user-images.githubusercontent.com/14249877/169330094-ac49bc86-3798-4288-9427-924b8036f347.png)
-4. `startchange`は、その譜面でゲーム開始時にシーン切り替えを有効・無効の選択をします。trueで有効、falseで無効です。
-5. `endchange`は、譜面の終了時のシーン切り替えの有効・無効です。
-6. `timelist`を各時間ごとにシーン名を入れた[オブジェクト](https://github.com/rynan4818/Streamlabs-obs-control/blob/main/js/song-scene.js#L8-L11)の配列にします。
-7. `time`は "分:秒.ミリ秒"です。ミリ秒、秒は省略可能です。
-8. `scene`は 切り替えるシーン名です。
-9. `gamescene`は、曲専用のゲーム中シーンがあれば設定します。省略時はデフォルトが有効になります。
-10. `startscene`は、曲専用のスタートシーンがあれば設定します。設定時は次の`startduration`も設定して下さい。省略時はデフォルト値が有効になります。
-11. `startduration`は、曲専用のスタートシーンの表示秒数です。0を指定するとデフォルトでスタートシーンが設定されている場合に無効になります。
-12. `menuscene`は、曲専用のメニューに戻った時のシーンを設定します。省略時はデフォルトが有効になります。
-13. `endscene`は、曲専用の終了シーンがあれば設定します。設定時は次の`endduration`も設定して下さい。省略時はデフォルト値が有効になります。曲専用はクリア条件等に関係なく固定です。
-14. `endduration`は、曲専用の終了シーンの表示秒数です。0を指定するとデフォルトで終了シーンが設定されている場合は無効になります。
+4. `songname`は譜面の曲名です。PRACTICEモード等ではハッシュ値が取得できないので曲名で指定して下さい。譜面エディタ等で正確な曲名を調べて入力して下さい。※`hash`が同時に設定されている場合は、ハッシュ値が優先されます。
+5. `startchange`は、その譜面でゲーム開始時にシーン切り替えを有効・無効の選択をします。trueで有効、falseで無効です。
+6. `endchange`は、譜面の終了時のシーン切り替えの有効・無効です。
+7. `timelist`を各時間ごとにシーン名を入れた[オブジェクト](https://github.com/rynan4818/Streamlabs-obs-control/blob/main/js/song-scene.js#L8-L11)の配列にします。
+8. `time`は "分:秒.ミリ秒"です。ミリ秒、秒は省略可能です。(小数点以下はミリ秒なので、0.5秒は0.500にして下さい。)
+9. `scene`は 切り替えるシーン名です。
+10. `gamescene`は、曲専用のゲーム中シーンがあれば設定します。省略時はデフォルトが有効になります。
+11. `startscene`は、曲専用のスタートシーンがあれば設定します。設定時は次の`startduration`も設定して下さい。省略時はデフォルト値が有効になります。
+12. `startduration`は、曲専用のスタートシーンの表示秒数です。0を指定するとデフォルトでスタートシーンが設定されている場合に無効になります。
+13. `menuscene`は、曲専用のメニューに戻った時のシーンを設定します。省略時はデフォルトが有効になります。
+14. `endscene`は、曲専用の終了シーンがあれば設定します。設定時は次の`endduration`も設定して下さい。省略時はデフォルト値が有効になります。曲専用はクリア条件等に関係なく固定です。
+15. `endduration`は、曲専用の終了シーンの表示秒数です。0を指定するとデフォルトで終了シーンが設定されている場合は無効になります。
 
 ## ライセンス
 
