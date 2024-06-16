@@ -119,7 +119,7 @@
 
     <script src='./js/obs-control.js'></script>
 
-[の行の**上に**](https://github.com/rynan4818/Streamlabs-obs-control/blob/main/index.html#L115) ※`obs-control.js`より下だと動作しません。
+[の行の**上に**](https://github.com/rynan4818/Streamlabs-obs-control/blob/main/index.html#L115) **※`obs-control.js`より下だと動作しません。**
 
     <script src='./js/song-scene.js'></script>
 
@@ -127,6 +127,9 @@
 
 次に`js`フォルダの`song-scene.js` ファイルに曲ごとのシーン切り替え情報を設定します。
 
+**`song-scene.js`は、こちらの説明コメント付きではなくzipファイルに付属している[コメントの無い方](https://github.com/rynan4818/Streamlabs-obs-control/blob/main/js/song-scene.js)を使用して下さい。コメント付きだと動作しません**
+
+    //JSON内にコメントを入れるとエラーで動作しないので、こちらの説明は使用しないで下さい。zip内のsong-scene.jsを使用して下さい。
     const song_scene_json = `                                 //バッククオートからJSONデータ開始
     [                                                         //設定したい譜面の数だけ並べる
       {                                                       //１譜面目の情報
